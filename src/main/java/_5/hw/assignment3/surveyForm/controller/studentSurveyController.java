@@ -18,7 +18,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -58,9 +61,11 @@ public class studentSurveyController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteStudentSurveyData(@PathVariable("id") long studentId) {
+    public ResponseEntity<?> deleteStudentSurveyData(@PathVariable("id") long studentId) {
         logger.info("Deleting survey data for the survey id:{} ", studentId);
         studentService.deleteStudentSurveyData(studentId);
-        return new ResponseEntity<String>("Student Survey Form data has been deleted successfully",HttpStatus.OK);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Student Survey Form data has been deleted successfully for id: " + studentId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
