@@ -1,5 +1,7 @@
 /*
   Ramyasahithya Magani - G01425752
+  Saichinmayee Yanamadala-G01459318
+  Sreshta Kosaraju - G01460468
 */
 
 /*This program is used to initialize and start the Spring Boot application.*/

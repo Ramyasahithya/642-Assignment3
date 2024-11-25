@@ -1,7 +1,6 @@
 /*
   Ramyasahithya Magani - G01425752
-  Arsitha Sathu - G01445215
-  Athiksha Venkannagari - G01461169
+  Saichinmayee Yanamadala-G01459318
   Sreshta Kosaraju - G01460468
 */
 

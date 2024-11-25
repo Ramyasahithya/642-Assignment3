@@ -1,3 +1,10 @@
+/*
+  Ramyasahithya Magani - G01425752
+  Saichinmayee Yanamadala-G01459318
+  Sreshta Kosaraju - G01460468
+*/
+
+/*A custom runtime exception used to handle cases where a specific resource is not found*/
 package _5.hw.assignment3.surveyForm.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
