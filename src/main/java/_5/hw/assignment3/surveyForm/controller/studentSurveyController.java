@@ -23,6 +23,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/studentSurveyData")
+@CrossOrigin(origins = "http://localhost:4200")
 public class studentSurveyController {
     private final studentSurveyService studentService;
 
