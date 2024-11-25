@@ -20,5 +20,5 @@ public interface studentSurveyService {
     List<studentSurveyData> getAllStudentsSurveyData();
     studentSurveyData getStudentSurveyDataById(long id);
     ResponseEntity<?> updateStudentSurveyDataById(studentSurveyData student, long id);
-    boolean deleteStudentSurveyData(long id);
+    void deleteStudentSurveyData(long id);
 }

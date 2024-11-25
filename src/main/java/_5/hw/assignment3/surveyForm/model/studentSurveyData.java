@@ -1,12 +1,10 @@
 /*
   Ramyasahithya Magani - G01425752
-  Arsitha Sathu - G01445215
-  Athiksha Venkannagari - G01461169
-  Sreshta Kosaraju - G01460468
 */
 
 /*
-This class represents the data model for student survey form responses, By mapping surveyData table in the database.
+This class represents the data model for student survey form responses.
+By mapping surveyData table in the database.
 */
 
 package _5.hw.assignment3.surveyForm.model;

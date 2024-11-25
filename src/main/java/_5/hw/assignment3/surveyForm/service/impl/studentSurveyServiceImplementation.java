@@ -1,16 +1,15 @@
 /*
   Ramyasahithya Magani - G01425752
-  Arsitha Sathu - G01445215
-  Athiksha Venkannagari - G01461169
-  Sreshta Kosaraju - G01460468
 */
 
 /*
-This class provide implementation for studentSurveyService interface by hadling business logic for creating, updating, retrieving and deleting student survey form details.
+This class provide implementation for studentSurveyService interface by handling
+ business logic for creating, updating, retrieving and deleting student survey form details.
 */
 
 package _5.hw.assignment3.surveyForm.service.impl;
 
+import _5.hw.assignment3.surveyForm.exception.ResourceNotFoundException;
 import _5.hw.assignment3.surveyForm.model.studentSurveyData;
 import _5.hw.assignment3.surveyForm.repository.studentSurveyRepository;
 import _5.hw.assignment3.surveyForm.service.studentSurveyService;
@@ -35,9 +34,13 @@ public class studentSurveyServiceImplementation implements studentSurveyService 
     }
 
     public studentSurveyData getStudentSurveyDataById(long id) {
-        return studentRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(new studentSurveyData())).getBody();
+        Optional<studentSurveyData> studentData= studentRepository.findById(id);
+        if(studentData.isPresent())
+        {
+            return studentData.get();
+        }else{
+            throw new ResourceNotFoundException("Student Survey Data Not found for","Id",id);
+        }
     }
     public List<studentSurveyData> getAllStudentsSurveyData() {
         return studentRepository.findAll();
@@ -46,7 +49,7 @@ public class studentSurveyServiceImplementation implements studentSurveyService 
     public ResponseEntity<?> updateStudentSurveyDataById(studentSurveyData student, long id){
         Optional<studentSurveyData> optionalSurvey = studentRepository.findById(id);
         if (optionalSurvey.isEmpty()) {
-            return new ResponseEntity<>("Survey with ID " + id + " not found", HttpStatus.NOT_FOUND);
+            throw new ResourceNotFoundException("Student Survey Data Not found for","Id",id);
         }
         studentSurveyData existingSurvey = optionalSurvey.get();
 
@@ -66,13 +69,12 @@ public class studentSurveyServiceImplementation implements studentSurveyService 
         return new ResponseEntity<>(existingSurvey,HttpStatus.OK);
     }
 
-    public boolean deleteStudentSurveyData(long id) {
+    public void deleteStudentSurveyData(long id) {
         Optional<studentSurveyData> survey = studentRepository.findById(id);
         if (survey.isPresent()) {
             studentRepository.deleteById(id);
-            return true;
         } else {
-            return false;
+            throw new ResourceNotFoundException("Student Survey Data Not found for","Id",id);
         }
 
     }

@@ -1,8 +1,5 @@
 /*
   Ramyasahithya Magani - G01425752
-  Arsitha Sathu - G01445215
-  Athiksha Venkannagari - G01461169
-  Sreshta Kosaraju - G01460468
 */
 
 /*
@@ -24,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/surveyData")
+@RequestMapping("/api/studentSurveyData")
 public class studentSurveyController {
     private final studentSurveyService studentService;
 
@@ -54,23 +51,14 @@ public class studentSurveyController {
 
     @PutMapping("{id}")
     public ResponseEntity<?> updateStudentSurveyDataById(@RequestBody studentSurveyData studentSurvey, @PathVariable("id") long studentId) {
+        logger.info("Updating survey data for the survey id:{} and update request is: {}", studentId,studentSurvey.toString());
         return studentService.updateStudentSurveyDataById(studentSurvey, studentId);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteStudentSurveyData(@PathVariable("id") long studentId) {
-        try {
-            boolean isDeleted = studentService.deleteStudentSurveyData(studentId);
-            if (isDeleted) {
-                logger.info("Deleted student survey data from database for the id: {}", studentId);
-                return new ResponseEntity<>("Student survey form deleted successfully", HttpStatus.OK);
-            } else {
-                logger.warn("Attempted to delete non-existent student survey data for id: {}", studentId);
-                return new ResponseEntity<>("No data found for the given ID. It might have already been deleted.", HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            logger.error("An error occurred while deleting the student survey data for id: {}", studentId, e);
-            return new ResponseEntity<>("An error occurred while processing the request.", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        logger.info("Deleting survey data for the survey id:{} ", studentId);
+        studentService.deleteStudentSurveyData(studentId);
+        return new ResponseEntity<String>("Student Survey Form data has been deleted successfully",HttpStatus.OK);
     }
 }
